@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/atheri/github/csci511/stack_as_template'
+let g:netrw_dirhist_2='/home/atheri/github/csci511/string_substitution'
+let g:netrw_dirhist_3='/home/atheri/project2'
+let g:netrw_dirhist_4='/home/atheri/github/csci551'
+let g:netrw_dirhist_5='/home/atheri/Downloads/project3/rivera10'
+let g:netrw_dirhist_6='/home/atheri'
+let g:netrw_dirhist_7='/home/atheri/.adobe'
+let g:netrw_dirhist_8='/home/atheri/github'
+let g:netrw_dirhist_9='/home/atheri/github/project-euler'
