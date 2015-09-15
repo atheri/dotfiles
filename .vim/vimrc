@@ -1,3 +1,7 @@
+" Pathogen "
+execute pathogen#infect()
+filetype plugin indent on
+
 set nocompatible
 set autoindent
 set ruler
@@ -18,7 +22,7 @@ set list
 set listchars=tab:T>
 
 " Colorscheme "
-colorscheme wombat256
+colorscheme wombat
 
 " Column to denote max line length "
 let &colorcolumn="80,".join(range(120,999),",")
@@ -31,3 +35,11 @@ set number
 
 " Recognizes Tyson's 'gpl' language for syntax highlights "
 au BufRead,BufNewFile *.gpl    set filetype=gpl
+
+" Persistent Undo "
+set undofile
+
+" Directories for swap, undo and bak "
+set dir=~/.vim/.swap
+set undodir=~/.vim/.undo
+set backupdir=~/.vim/.backup
