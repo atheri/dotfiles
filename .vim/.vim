@@ -1,1 +1,0 @@
-/home/atheri/.dotfiles/.vim
