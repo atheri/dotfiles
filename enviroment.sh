@@ -8,6 +8,7 @@ git config --global user.name "atheri"
 git config --global user.email "corylotze@gmail.com"
 git config --global merge.tool vimdiff
 
+sudo rm ~/.dotfiles -r
 git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
