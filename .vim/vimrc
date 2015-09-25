@@ -15,7 +15,7 @@ set nocompatible
 set ruler
 set mouse=a
 
-" Let vim use the system clipboard by defaulti "
+" Let vim use the system clipboard by default "
 set clipboard=unnamedplus
 " Preserve the clipboard on vim exit "
 autocmd VimLeave * call system("xsel -ib", getreg('+'))
