@@ -97,5 +97,6 @@ export TERM="xterm-256color"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+# testing
 # Aliases
 alias doweb='ssh atheri@104.236.172.222'  # Digital Ocean server for csci 465
