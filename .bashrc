@@ -96,3 +96,6 @@ export TERM="xterm-256color"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Aliases
+alias doweb='ssh atheri@104.236.172.222'  # Digital Ocean server for csci 465
