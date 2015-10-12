@@ -100,3 +100,4 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # Aliases
 alias doweb='ssh atheri@104.236.172.222'  # Digital Ocean server for csci 465
 alias arestart='sudo apache2ctl restart'
+alias cljaguar='ssh clotze@jaguar.csuchico.edu'
