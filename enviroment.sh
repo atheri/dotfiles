@@ -30,5 +30,10 @@ mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap
 # Get wombat colorscheme
 git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/bundle/vim-wombat-scheme
 
-# Get supertab vim plugin
+# vim plugins
+# Supertab
 git clone https://github.com/ervandew/supertab.git ~/.vim/bundle/supertab
+
+# vim-rails
+git clone git://github.com/tpope/vim-rails.git ~/.vim/bundle/vim-rails
+git clone git://github.com/tpope/vim-bundler.git ~/.vim/bundle/vim-bundler
