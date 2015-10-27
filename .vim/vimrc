@@ -4,7 +4,6 @@ execute pathogen#infect()
 " Syntax & filetype "
 syntax on
 filetype plugin indent on
-filetype plugin on
 
 " Highlight tab characters "
 highlight SpecialKey ctermfg=1
@@ -28,13 +27,14 @@ let &colorcolumn="80,".join(range(120,999),",")
 
 " Tab setting "
 set expandtab
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 set number
 
 " Indenting "
 set backspace=indent,eol,start
 set autoindent
+set smartindent
 
 " Persistent Undo "
 set undofile
