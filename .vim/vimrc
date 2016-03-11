@@ -16,8 +16,6 @@ set mouse=a
 
 " Let vim use the system clipboard by default "
 set clipboard=unnamedplus
-" Preserve the clipboard on vim exit "
-autocmd VimLeave * call system("xsel -ib", getreg('+'))
 
 " Colorscheme "
 colorscheme wombat
@@ -43,3 +41,12 @@ set undofile
 set dir=~/.vim/.swap
 set undodir=~/.vim/.undo
 set backupdir=~/.vim/.backup
+
+" Folding Options "
+set foldenable          " enable folding
+set foldlevelstart=10   " fold levels to open by default
+set foldnestmax=10      " max num of nested folds allowed
+set foldmethod=indent   " there are like 6 other ways
+
+" Key maps "
+nnoremap <space> za
