@@ -26,20 +26,13 @@ shopt -s checkwinsize
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+# prompt
+export PS1="\u@\h:\W\$ "
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -92,6 +85,8 @@ export LD_LIBRARY_PATH='/opt/openmpi/lib'
 
 # Makes terminal support 256 colors
 export TERM="xterm-256color"
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session
 
