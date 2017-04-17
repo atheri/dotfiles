@@ -93,11 +93,15 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Aliases
-alias doweb='ssh atheri@104.236.172.222'  # Digital Ocean server for csci 465
 alias arestart='sudo apache2ctl restart'
 alias cljaguar='ssh clotze@jaguar.csuchico.edu'
 alias ahtml='cd /var/www/html'
 alias sites-available='sudo vim /etc/apache2/sites-available/000-default.conf'
-alias 465='cd ~/465'
+alias ssh_gce-43='ssh atheri@35.185.202.140'
 alias cl_sys_prob='sudo rm /var/crash/*'
-alias do490='ssh atheri@104.236.149.121'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/lotzec/google-cloud-sdk/path.bash.inc' ]; then source '/Users/lotzec/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/lotzec/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/lotzec/google-cloud-sdk/completion.bash.inc'; fi
