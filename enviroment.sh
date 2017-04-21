@@ -25,7 +25,7 @@ mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap
 
 # Get wombat colorscheme
 sudo rm ~/.vim/colors -rf
-git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/colors
-sudo rm ~/.vim/colors/README.md -f
+git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/
+sudo rm ~/.vim/README.md -f
 
 
