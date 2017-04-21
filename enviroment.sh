@@ -9,7 +9,7 @@ git config --global user.email "corylotze@gmail.com"
 git config --global merge.tool vimdiff
 
 # Download dotfiles
-sudo rm ~/.dotfiles -r
+sudo rm ~/.dotfiles -rf
 git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
@@ -20,23 +20,12 @@ for file in $DOTFILES; do
     ln -s -f $DEST/$file ~/$file
 done
 
-# Install Pathogen
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
 # Create directories for vim
 mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap
 
 # Get wombat colorscheme
-git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/bundle/vim-wombat-scheme
+sudo rm ~/.vim/colors -rf
+git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/colors
+sudo rm ~/.vim/colors/README.md -f
 
-# vim plugins
-# Supertab
-git clone https://github.com/ervandew/supertab.git ~/.vim/bundle/supertab
 
-# vim-rails
-git clone git://github.com/tpope/vim-rails.git ~/.vim/bundle/vim-rails
-git clone git://github.com/tpope/vim-bundler.git ~/.vim/bundle/vim-bundler
-
-# vim-ruby
-git clone git://github.com/vim-ruby/vim-ruby.git ~/.vim/bundle/vim-ruby

@@ -1,6 +1,3 @@
-" Pathogen "
-execute pathogen#infect()
-
 " Syntax & filetype "
 syntax on
 filetype plugin indent on
@@ -14,7 +11,6 @@ set nocompatible
 set ruler
 set mouse=a
 
-" Let vim use the system clipboard by default "
 set clipboard=unnamedplus
 
 " Colorscheme "
@@ -50,3 +46,27 @@ set foldmethod=indent   " there are like 6 other ways
 
 " Key maps "
 nnoremap <space> za
+
+" Set cursor in vim modes "
+let &t_SI = "\e[5 q"  " insert mode
+let &t_EI = "\e[1 q"  " normal mode
+
+" Install vim-plug + plugins "
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree'
+
+call plug#end()
+
+""" Plugin Related """
+" gitgutter "
+set updatetime=250

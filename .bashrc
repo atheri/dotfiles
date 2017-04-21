@@ -103,5 +103,10 @@ alias cl_sys_prob='sudo rm /var/crash/*'
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/lotzec/google-cloud-sdk/path.bash.inc' ]; then source '/Users/lotzec/google-cloud-sdk/path.bash.inc'; fi
 
-# The next line enables shell command completion for gcloud.
+# The next line enables shell command completion for  gcloud.
 if [ -f '/Users/lotzec/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/lotzec/google-cloud-sdk/completion.bash.inc'; fi
+
+# Add private key to ssh-agent
+ssh-add ~/.ssh/atheri_ssh_key
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
