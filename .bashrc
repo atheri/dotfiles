@@ -107,6 +107,7 @@ if [ -f '/Users/lotzec/google-cloud-sdk/path.bash.inc' ]; then source '/Users/lo
 if [ -f '/Users/lotzec/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/lotzec/google-cloud-sdk/completion.bash.inc'; fi
 
 # Add private key to ssh-agent
+eval $(ssh-agent -s)
 ssh-add ~/.ssh/atheri_ssh_key
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
