@@ -6,3 +6,4 @@ autoload
 bundle
 .vim/plugged
 .vim/colors
+.idea
