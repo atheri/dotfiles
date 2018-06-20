@@ -7,3 +7,4 @@ bundle
 .vim/plugged
 .vim/colors
 .idea
+.DS_Store

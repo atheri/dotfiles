@@ -51,15 +51,9 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -100,14 +94,8 @@ alias sites-available='sudo vim /etc/apache2/sites-available/000-default.conf'
 alias ssh_gce-43='ssh atheri@35.185.202.140'
 alias cl_sys_prob='sudo rm /var/crash/*'
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/lotzec/google-cloud-sdk/path.bash.inc' ]; then source '/Users/lotzec/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for  gcloud.
-if [ -f '/Users/lotzec/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/lotzec/google-cloud-sdk/completion.bash.inc'; fi
-
-# Add private key to ssh-agent
-eval $(ssh-agent -s)
-ssh-add ~/.ssh/atheri_ssh_key
+# Add private key to ssh-agent on terminal start
+#eval $(ssh-agent -s)
+#ssh-add ~/.ssh/atheri_ssh_key
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

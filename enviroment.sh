@@ -7,6 +7,7 @@ sudo apt-get install -y vim git curl
 git config --global user.name "atheri"
 git config --global user.email "corylotze@gmail.com"
 git config --global merge.tool vimdiff
+git config --global --add difftool.prompt false
 
 # Download dotfiles
 sudo rm ~/.dotfiles -rf
