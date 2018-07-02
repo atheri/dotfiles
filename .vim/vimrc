@@ -11,8 +11,6 @@ set nocompatible
 set ruler
 set mouse=a
 
-set clipboard=unnamedplus
-
 " Colorscheme "
 colorscheme wombat
 

@@ -1,7 +1,20 @@
 #!/bin/bash
 
 # General installs
-sudo apt-get install -y vim git curl
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  sudo apt-get install -y vim git curl
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  if ! brew -v > /dev/null; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+  brew install vim
+  brew install git
+  brew install bash-completion
+  brew install fzf
+else
+  echo "Supported system not detected"
+  exit 1
+fi
 
 # Git config
 git config --global user.name "atheri"
@@ -15,7 +28,7 @@ git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
 DEST=~/.dotfiles
-DOTFILES=".bashrc .vim"
+DOTFILES=".bashrc .bashrc_mac .vim"
 for file in $DOTFILES; do
     sudo rm -r ~/$file
     ln -s -f $DEST/$file ~/$file
@@ -30,3 +43,5 @@ git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/colors
 sudo rm ~/.vim/colors/README.md -f
 mv ~/.vim/colors/colors/wombat.vim ~/.vim/colors/
 rm ~/.vim/colors/color -rf
+
+source ~/.bashrc

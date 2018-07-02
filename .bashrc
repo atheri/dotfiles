@@ -82,20 +82,19 @@ export TERM="xterm-256color"
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# Aliases
-alias arestart='sudo apache2ctl restart'
-alias cljaguar='ssh clotze@jaguar.csuchico.edu'
-alias ahtml='cd /var/www/html'
-alias sites-available='sudo vim /etc/apache2/sites-available/000-default.conf'
-alias ssh_gce-43='ssh atheri@35.185.202.140'
-alias cl_sys_prob='sudo rm /var/crash/*'
-
 # Add private key to ssh-agent on terminal start
-#eval $(ssh-agent -s)
-#ssh-add ~/.ssh/atheri_ssh_key
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/cc_id_rsa
 
+# fzf options
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='fd --type f --ignore-case' # case insensitive fzf
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  echo "LINUX"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  source ~/.bashrc_mac
+else
+  echo "Supported system not detected"
+fi
