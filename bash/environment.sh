@@ -12,6 +12,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   fi
   brew install vim
   brew install git
+  #brew install bash-completion
   brew install fzf
   brew install zsh zsh-completions
   chsh -s /bin/zsh
@@ -38,7 +39,7 @@ git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
 DEST=~/.dotfiles
-DOTFILES=".vim"
+DOTFILES=".bashrc .bashrc_mac .vim"
 for file in $DOTFILES; do
     rm -rf ~/$file
     ln -s -f $DEST/$file ~/$file
@@ -53,3 +54,5 @@ git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/colors
 rm ~/.vim/colors/README.md -f
 mv ~/.vim/colors/colors/wombat.vim ~/.vim/colors/
 rm ~/.vim/colors/colors -rf
+
+source ~/.bashrc
