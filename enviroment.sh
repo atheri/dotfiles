@@ -38,7 +38,7 @@ git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
 DEST=~/.dotfiles
-DOTFILES=".vim"
+DOTFILES=".vim .zshrc"
 for file in $DOTFILES; do
     rm -rf ~/$file
     ln -s -f $DEST/$file ~/$file
