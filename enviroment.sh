@@ -3,7 +3,11 @@
 # General installs
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "environment.sh: LINUX"
-  sudo apt-get install -y vim git curl zsh
+  sudo apt-get install -y vim
+  sudo apt-get install -y git
+  sudo apt-get install -y curl 
+  sudo apt-get install -y tmux
+  sudo apt-get install -y zsh
   chsh -s $(which zsh)
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "environment.sh: MAC"
