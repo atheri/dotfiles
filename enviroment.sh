@@ -3,9 +3,7 @@
 # General installs
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "environment.sh: LINUX"
-  sudo apt-get install -y vim
-  sudo apt-get install -y git
-  sudo apt-get install -y curl 
+  sudo apt-get install -y vim git curl 
   sudo apt-get install -y tmux
   sudo apt-get install -y zsh
   chsh -s $(which zsh)
@@ -29,6 +27,7 @@ fi
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9
 
 # Git config
 git config --global user.name "atheri"
