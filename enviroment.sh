@@ -53,3 +53,7 @@ git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/colors
 rm ~/.vim/colors/README.md -f
 mv ~/.vim/colors/colors/wombat.vim ~/.vim/colors/
 rm ~/.vim/colors/colors -rf
+
+echo "----------------------------------------------------"
+echo "---------- Restart for zsh to take effect ----------"
+echo "----------------------------------------------------"
