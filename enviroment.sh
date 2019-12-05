@@ -3,10 +3,10 @@
 # General installs
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "environment.sh: LINUX"
-  sudo apt-get install -y vim git curl 
+  sudo apt-get install -y vim git curl
   sudo apt-get install -y tmux
   sudo apt-get install -y zsh
-  chsh -s $(which zsh)
+  chsh -s "$(which zsh)"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "environment.sh: MAC"
   if ! brew -v > /dev/null; then
@@ -30,8 +30,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
 # Git config
-git config --global user.name "atheri"
-git config --global user.email "corylotze@gmail.com"
+git config --global user.name "Cory Lotze"
+git config --global user.email "cory.lotze@clearcapital.com"
 git config --global merge.tool vimdiff
 git config --global --add difftool.prompt false
 

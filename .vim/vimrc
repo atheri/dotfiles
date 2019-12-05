@@ -3,9 +3,9 @@ syntax on
 filetype plugin indent on
 
 " Highlight tab characters "
-highlight SpecialKey ctermfg=1
-set list
-set listchars=tab:T>
+"highlight SpecialKey ctermfg=1
+"set list
+"set listchars=tab:T>
 
 set nocompatible
 set ruler
@@ -27,6 +27,9 @@ set number
 set backspace=indent,eol,start
 set autoindent
 set smartindent
+
+" Clipboard "
+set clipboard=unnamed
 
 " Persistent Undo "
 set undofile
