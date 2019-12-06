@@ -3,23 +3,17 @@
 # General installs
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "environment.sh: LINUX"
-  sudo apt-get install -y vim git curl
-  sudo apt-get install -y tmux
-  sudo apt-get install -y zsh
+  sudo apt-get install -y vim git curl zsh
   chsh -s "$(which zsh)"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "environment.sh: MAC"
   if ! brew -v > /dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
-  brew install vim
-  brew install git
-  brew install fzf
-  brew install zsh zsh-completions
+  brew install vim git fzf zsh zsh-completions tmux
   chsh -s /bin/zsh
 elif [[ "$OSTYPE" == "msys" ]]; then
   echo "environment.sh: WINDOWS + GITBASH"
-
 else
   echo "environment.sh: SUPPORTED SYSTEM NOT DETECTED"
   exit 1
@@ -27,7 +21,7 @@ fi
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
 # Git config
 git config --global user.name "Cory Lotze"
@@ -41,11 +35,13 @@ git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
 DEST=~/.dotfiles
-DOTFILES=".vim .zshrc"
+DOTFILES=".vim .zshrc .p10k.zsh"
 for file in $DOTFILES; do
-    rm -rf ~/$file
-    ln -s -f $DEST/$file ~/$file
+    rm -rf ~/"$file"
+    ln -s -f "$DEST/$file" ~/"$file"
 done
+
+ln -s -f "$ZSH_CUSTOM/alias.zsh" ".aliases"
 
 # Create directories for vim
 mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap
