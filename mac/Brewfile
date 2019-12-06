@@ -1,0 +1,6 @@
+brew "vim"
+brew "git"
+brew "fzf"
+brew "zsh"
+brew "zsh-completions"
+brew "tmux"

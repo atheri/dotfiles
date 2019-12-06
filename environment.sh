@@ -10,7 +10,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   if ! brew -v >/dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
-  brew install vim git fzf zsh zsh-completions tmux
+  brew bundle --file=mac/Brewfile
   chsh -s /bin/zsh
 elif [[ "$OSTYPE" == "msys" ]]; then
   echo "environment.sh: WINDOWS + GITBASH"
@@ -51,9 +51,9 @@ mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap
 # Get wombat colorscheme
 if [ -d ~/.vim/colors ]; then rm -rf ~/.vim/colors; fi
 git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/colors
-rm ~/.vim/colors/README.md -f
+rm -f ~/.vim/colors/README.md
 mv ~/.vim/colors/colors/wombat.vim ~/.vim/colors/
-rm ~/.vim/colors/colors -rf
+rm -rf ~/.vim/colors/colors
 
 echo "----------------------------------------------------"
 echo "---------- Restart for zsh to take effect ----------"
