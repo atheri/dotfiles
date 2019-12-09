@@ -23,6 +23,7 @@ alias mfadrccp="aws-mfa --duration 3600 --assume-role arn:aws:iam::560868401279:
 alias mfaall="mfabpprod;mfaprod;mfadev;mfamain;mfabpnpe;mfaae;mfabiwell;mfara;mfainstaclustr;mfaservicedesk"
 
 alias k="kubectl"
+alias watch='watch '
 
 alias ecrlogin_main="mfamain; aws ecr get-login --no-include-email --profile clearcapital-main --region us-west-2 | source /dev/stdin"
 alias ecrlogin_drops="mfadrops; aws ecr get-login --no-include-email --profile clearcapital-drops --region us-east-1 | source /dev/stdin"
