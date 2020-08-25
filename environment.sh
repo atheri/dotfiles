@@ -42,8 +42,11 @@ for file in $DOTFILES; do
   ln -s -f "$DEST/$file" ~/"$file"
 done
 
-if [ -d ~/.aliases ]; then rm -rf ~/.aliases; fi
-ln -s -f "$HOME/.oh-my-zsh/custom/alias.zsh" ".aliases"
+# Setup alias file
+FILE=".aliases.zsh"
+if [ -d ~/$FILE ]; then rm -rf ~/$FILE; fi
+ln -s -f "$HOME/.oh-my-zsh/custom/alias.zsh" "$FILE"
+ln -s -f "$DOTFILES/$FILE" "$HOME/.oh-my-zsh/custom/alias.zsh"
 
 # Create directories for vim
 mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap

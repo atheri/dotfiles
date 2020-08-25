@@ -5,11 +5,32 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+source ~/.secrets.sh
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:$HOME/.istioctl/bin
+export PATH="/usr/local/sbin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+export GROOVY_HOME="/usr/local/opt/groovy/libexec"
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+# Bitbucket credentials for private repos, R uses them
+export BITBUCKET_USER=cc_clotze
+# set in secrets file
+#export BITBUCKET_PASSWORD=
+
+# kubeconfig
+# Separate file per k8s configuration
+if [ -d $HOME/.kube ]; then
+    for CONFIG in $(ls $HOME/.kube/config.*); do
+        export KUBECONFIG=$KUBECONFIG:$CONFIG
+    done
+    export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config
+fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -120,3 +141,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# init pyenv python installation management
+eval "$(pyenv init -)"
