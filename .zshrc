@@ -16,8 +16,9 @@ export PATH="/usr/local/sbin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
 
 export GROOVY_HOME="/usr/local/opt/groovy/libexec"
-export JAVA_HOME=$(/usr/libexec/java_home)
-
+if type "java" > /dev/null; then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 # Bitbucket credentials for private repos, R uses them
 export BITBUCKET_USER=cc_clotze
 # set in secrets file
@@ -142,5 +143,10 @@ export NVM_DIR="$HOME/.nvm"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
 # init pyenv python installation management
 eval "$(pyenv init -)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

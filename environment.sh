@@ -4,6 +4,7 @@
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "environment.sh: LINUX"
   sudo apt-get install -y vim git curl zsh
+  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
   chsh -s "$(which zsh)"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "environment.sh: MAC"
@@ -45,11 +46,14 @@ done
 # Setup alias file
 FILE=".aliases.zsh"
 if [ -d ~/$FILE ]; then rm -rf ~/$FILE; fi
-ln -s -f "$HOME/.oh-my-zsh/custom/alias.zsh" "$FILE"
 ln -s -f "$DOTFILES/$FILE" "$HOME/.oh-my-zsh/custom/alias.zsh"
+ln -s -f "$HOME/.oh-my-zsh/custom/alias.zsh" "$FILE"
 
 # Create directories for vim
 mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap
+
+# placeholder secrets file
+touch ~/.secrets.sh
 
 # Get wombat colorscheme
 if [ -d ~/.vim/colors ]; then rm -rf ~/.vim/colors; fi
