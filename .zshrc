@@ -11,6 +11,7 @@ source ~/.secrets.sh
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/.istioctl/bin
 export PATH="/usr/local/sbin:$PATH"
+export PATH="${PATH}:${HOME}/.krew/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -27,7 +28,7 @@ export BITBUCKET_USER=cc_clotze
 # kubeconfig
 # Separate file per k8s configuration
 if [ -d $HOME/.kube ]; then
-    for CONFIG in $(ls $HOME/.kube/config.*); do
+    for CONFIG in $(ls $HOME/.kube/*.config); do
         export KUBECONFIG=$KUBECONFIG:$CONFIG
     done
     export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config

@@ -18,7 +18,6 @@ alias mfabiwell="aws-mfa --duration 3600 --profile clearcapital --long-term-suff
 alias mfara="aws-mfa --duration 3600 --profile clearcapital --long-term-suffix iam --assume-role arn:aws:iam::977427857772:role/DevOps --short-term-suffix ra --no-mfa-prompt"
 alias mfadev="aws-mfa --duration 3600 --profile clearcapital --long-term-suffix iam --assume-role arn:aws:iam::296857587692:role/DevOps --short-term-suffix dev --no-mfa-prompt"
 alias mfaae="aws-mfa --duration 3600 --profile clearcapital --long-term-suffix iam --assume-role arn:aws:iam::470225182719:role/DevOps --short-term-suffix ae --no-mfa-prompt"
-alias mfaminerkasch="aws-mfa --duration 3600 --profile clearcapital --long-term-suffix iam --assume-role arn:aws:iam::219985337836:role/DevOps --short-term-suffix minerkasch --no-mfa-prompt"
 alias mfaservicedesk="aws-mfa --duration 3600 --profile clearcapital --long-term-suffix iam --assume-role arn:aws:iam::127555975495:role/DevOps --short-term-suffix servicedesk --no-mfa-prompt"
 alias mfainstaclustr="aws-mfa --duration 3600 --profile clearcapital --long-term-suffix iam --assume-role arn:aws:iam::862958688947:role/DevOps --short-term-suffix instaclustr --no-mfa-prompt"
 alias mfadrops="aws-mfa --duration 3600 --profile clearcapital --long-term-suffix iam --assume-role arn:aws:iam::759107157084:role/DevOps --short-term-suffix drops --no-mfa-prompt"
@@ -52,7 +51,7 @@ alias kvu="kubectl view-utilization"
 
 function watchpods() {watch "kubectl get pods -A | grep -E '$1'"}
 
-alias ecrlogin_main="mfamain; aws ecr get-login --no-include-email --profile clearcapital-main --region us-west-2 | source /dev/stdin"
+alias ecrlogin_main="mfamain; aws ecr get-login-password --profile clearcapital-main --region us-west-2 | docker login --username AWS --password-stdin 301792755408.dkr.ecr.us-west-2.amazonaws.com"
 alias ecrlogin_drops="mfadrops; aws ecr get-login --no-include-email --profile clearcapital-drops --region us-east-1 | source /dev/stdin"
 
 function setAws() {eval "$(~/utils/set.sh $1 $2)"}
