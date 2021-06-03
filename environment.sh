@@ -46,8 +46,8 @@ done
 # Setup alias file
 FILE=".aliases.zsh"
 if [ -d ~/$FILE ]; then rm -rf ~/$FILE; fi
-ln -s -f "$DOTFILES/$FILE" "$HOME/.oh-my-zsh/custom/alias.zsh"
-ln -s -f "$HOME/.oh-my-zsh/custom/alias.zsh" "$FILE"
+ln -s -f "$DOTFILES/$FILE" "$HOME/.oh-my-zsh/custom/$FILE"
+ln -s -f "$HOME/.oh-my-zsh/custom/$FILE" "$FILE"
 
 # Create directories for vim
 mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap
