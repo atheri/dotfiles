@@ -9,15 +9,19 @@ source ~/.secrets.sh
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.istioctl/bin
-export PATH="/usr/local/sbin:$PATH"
-export PATH="${PATH}:${HOME}/.krew/bin"
+export PATH=/usr/local/sbin:$PATH
+export PATH=$PATH:$HOME/.krew/bin
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/go/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 export GROOVY_HOME="/usr/local/opt/groovy/libexec"
-if type "java" > /dev/null; then
+if type "java" > /dev/null && [ "$(uname)" = "Darwin" ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 # Bitbucket credentials for private repos, R uses them
@@ -25,10 +29,13 @@ export BITBUCKET_USER=cc_clotze
 # set in secrets file
 #export BITBUCKET_PASSWORD=
 
+# Terraform
+export TF_VAR_runby=cory.lotze
+
 # kubeconfig
 # Separate file per k8s configuration
 if [ -d $HOME/.kube ]; then
-    for CONFIG in $(ls $HOME/.kube/*.config); do
+    for CONFIG in $(ls $HOME/.kube/*config); do
         export KUBECONFIG=$KUBECONFIG:$CONFIG
     done
     export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config
@@ -144,10 +151,11 @@ export NVM_DIR="$HOME/.nvm"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
 # init pyenv python installation management
 eval "$(pyenv init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

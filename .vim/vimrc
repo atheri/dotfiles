@@ -29,7 +29,7 @@ set autoindent
 set smartindent
 
 " Clipboard "
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Persistent Undo "
 set undofile
