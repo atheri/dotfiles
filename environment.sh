@@ -33,7 +33,7 @@ git config --global --add difftool.prompt false
 
 # Download dotfiles
 if [ -d ~/.dotfiles ]; then rm -rf ~/.dotfiles; fi
-git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
+git clone git@github.com:atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
 DEST=~/.dotfiles

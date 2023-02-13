@@ -7,6 +7,9 @@ fi
 
 source ~/.secrets.sh
 
+#docker
+export DOCKER_BUILDKIT=1
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/bin
@@ -16,6 +19,8 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=$PATH:$HOME/.krew/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
+
+export GOBIN=$HOME/go/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -35,7 +40,7 @@ export TF_VAR_runby=cory.lotze
 # kubeconfig
 # Separate file per k8s configuration
 if [ -d $HOME/.kube ]; then
-    for CONFIG in $(ls $HOME/.kube/*config); do
+    for CONFIG in $(ls $HOME/.kube/config.*); do
         export KUBECONFIG=$KUBECONFIG:$CONFIG
     done
     export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config
@@ -106,6 +111,7 @@ CASE_SENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
   git
   kubectl
   terraform

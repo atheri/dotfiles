@@ -3,6 +3,7 @@ alias awssso="aws sso login --profile clearcapital-iam"
 alias k="kubectl"
 alias kubectx="kubectl ctx"
 alias kubens="kubectl ns"
+alias tfswitch="terraform-switcher"
 
 alias tg="terragrunt"
 
@@ -49,4 +50,8 @@ function kube-toggle() {
     zle push-input
     zle accept-line
   fi
+}
+
+function idea() {
+  nohup idea "$@" >/dev/null 2>&1 &
 }
