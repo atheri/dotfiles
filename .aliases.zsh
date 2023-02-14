@@ -55,3 +55,7 @@ function kube-toggle() {
 function idea() {
   nohup idea "$@" >/dev/null 2>&1 &
 }
+
+function k_getcertexp() {
+  kubectl get secret $1 -o "jsonpath={.data['tls\.crt']}" | base64 -d | openssl x509 -enddate -noout
+}
