@@ -29,7 +29,11 @@ set autoindent
 set smartindent
 
 " Clipboard "
-set clipboard=unnamedplus
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamedplus "Linux
+endif
 
 " Persistent Undo "
 set undofile

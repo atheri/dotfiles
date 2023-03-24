@@ -19,6 +19,8 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=$PATH:$HOME/.krew/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/.rd/bin
+export PATH="$PATH:$HOME:/Library/Application Support/JetBrains/Toolbox/scripts"
 
 export GOBIN=$HOME/go/bin
 
@@ -26,9 +28,6 @@ export GOBIN=$HOME/go/bin
 export ZSH="$HOME/.oh-my-zsh"
 
 export GROOVY_HOME="/usr/local/opt/groovy/libexec"
-if type "java" > /dev/null && [ "$(uname)" = "Darwin" ]; then
-  export JAVA_HOME=$(/usr/libexec/java_home)
-fi
 # Bitbucket credentials for private repos, R uses them
 export BITBUCKET_USER=cc_clotze
 # set in secrets file
