@@ -20,8 +20,6 @@ export PATH=$PATH:$HOME/.krew/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.rd/bin
-export PATH="$PATH:$HOME:/Library/Application Support/JetBrains/Toolbox/scripts"
-
 export GOBIN=$HOME/go/bin
 
 # Path to your oh-my-zsh installation.
