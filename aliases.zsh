@@ -1,4 +1,5 @@
-alias awssso="aws sso login --profile clearcapital-iam"
+alias awssso="aws sso login --profile sandbox"
+alias piplogin="aws codeartifact login --region us-west-2 --tool pip --repository redwood-pypi --domain redwood --domain-owner 250982523368 --profile infra"
 
 alias k="kubectl"
 alias kc="kubectl confirm"
@@ -9,17 +10,9 @@ alias tg="terragrunt"
 
 function watchpods() {watch "kubectl get pods -A | grep -E '$1'"}
 
-alias ecrlogin_main="aws ecr get-login-password --profile clearcapital-main --region us-west-2 | docker login --username AWS --password-stdin 301792755408.dkr.ecr.us-west-2.amazonaws.com"
-alias ecrlogin_drops="aws ecr get-login --no-include-email --profile clearcapital-drops --region us-east-1 | source /dev/stdin"
-
-alias calogin_mlprod="aws codeartifact login --tool pip --repository cc-pypi --domain clearcapital-com --domain-owner 977427857772 --profile clearcapital-mlprod"
 function switchJava() {sdk use java $(sdk list java | grep  '\-amzn' | grep 'installed' | cut -d '|' -f 6 - | fzf)}
 
-function setAws() {eval "$(~/utils/set.sh $1 $2)"}
-
-alias cd_Rlib="cd /usr/local/lib/R/3.6/site-library"
-
-function export_profile() {  
+function export_profile() {
   echo "exporting profile $1"
   aws-export-credentials --profile "$1" -c "${1}-export" --cache-file "$HOME/.aws/aws-credentials-export/$1"
 }
