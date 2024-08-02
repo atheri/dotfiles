@@ -24,6 +24,8 @@ export PATH=$PATH:$HOME/.rd/bin
 export PYTHONPATH=./src:$PYTHONPATH
 export GOBIN=$HOME/go/bin
 
+export K9S_CONFIG_DIR="$HOME/.k9s"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 

@@ -42,7 +42,7 @@ git clone git@github.com:atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
 DEST=~/.dotfiles
-DOTFILES=".vim .zshrc .p10k.zsh"
+DOTFILES=".vim .zshrc .p10k.zsh .k9s"
 for file in $DOTFILES; do
   if [ -d ~/"$file" ]; then rm -rf ~/"$file"; fi
   ln -s -f "$DEST/$file" ~/"$file"

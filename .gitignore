@@ -9,3 +9,5 @@ bundle
 .idea
 .DS_Store
 Brewfile.lock.json
+
+.k9s/clusters/
