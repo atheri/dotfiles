@@ -14,12 +14,14 @@ export DOCKER_BUILDKIT=1
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts
 export PATH=$PATH:$HOME/.istioctl/bin
 export PATH=/usr/local/sbin:$PATH
 export PATH=$PATH:$HOME/.krew/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.rd/bin
+export PYTHONPATH=./src:$PYTHONPATH
 export GOBIN=$HOME/go/bin
 
 # Path to your oh-my-zsh installation.
@@ -40,7 +42,6 @@ if [ -d $HOME/.kube ]; then
     for CONFIG in $(ls $HOME/.kube/config.*); do
         export KUBECONFIG=$KUBECONFIG:$CONFIG
     done
-    export KUBECONFIG=$KUBECONFIG:$HOME/.kube/config
 fi
 
 # Set name of the theme to load --- if set to "random", it will

@@ -1,5 +1,7 @@
 alias awssso="aws sso login --profile sandbox"
 alias piplogin="aws codeartifact login --region us-west-2 --tool pip --repository redwood-pypi --domain redwood --domain-owner 250982523368 --profile infra"
+alias venv_activate="source venv/bin/activate"
+alias venv_clean="pip list --format json | jq -r '.[].name' | grep -v '^pip$' | xargs pip uninstall -y"
 
 alias k="kubectl"
 alias kc="kubectl confirm"
@@ -8,9 +10,14 @@ alias kubens="kubectl ns"
 
 alias tg="terragrunt"
 
+alias docker_remove="docker stop $(docker ps -aq); docker rm -f $(docker ps -aq)"
+
+
 function watchpods() {watch "kubectl get pods -A | grep -E '$1'"}
 
 function switchJava() {sdk use java $(sdk list java | grep  '\-amzn' | grep 'installed' | cut -d '|' -f 6 - | fzf)}
+
+alias ecrlogin="aws ecr get-login-password --profile infra --region us-west-2 | docker login --username AWS --password-stdin 250982523368.dkr.ecr.us-west-2.amazonaws.com"
 
 function export_profile() {
   echo "exporting profile $1"
@@ -58,6 +65,10 @@ function kube-toggle() {
 
 function idea() {
   nohup idea "$@" >/dev/null 2>&1 &
+}
+
+function pycharm() {
+  nohup pycharm "$@" >/dev/null 2>&1 &
 }
 
 function k_getcertexp() {
