@@ -1,7 +1,7 @@
 alias awssso="aws sso login --profile sandbox"
 alias piplogin="aws codeartifact login --region us-west-2 --tool pip --repository redwood-pypi --domain redwood --domain-owner 250982523368 --profile infra"
-alias venv_activate="source venv/bin/activate"
-alias venv_clean="pip list --format json | jq -r '.[].name' | grep -v '^pip$' | xargs pip uninstall -y"
+alias venv_activate="source .venv/bin/activate"
+alias venv_clean="uv pip list --format json | jq -r '.[].name' | grep -v '^pip$' | xargs uv pip uninstall"
 
 alias k="kubectl"
 alias kc="kubectl confirm"
@@ -73,4 +73,20 @@ function pycharm() {
 
 function k_getcertexp() {
   kubectl get secret $1 -o "jsonpath={.data['tls\.crt']}" | base64 -d | openssl x509 -enddate -noout
+}
+
+function uvlogin() {
+  AWS_DOMAIN="redwood"
+  AWS_ACCOUNT_ID="250982523368"
+  AWS_REGION="us-west-2"
+  AWS_CODEARTIFACT_REPOSITORY="redwood-pypi"
+  AWS_CODEARTIFACT_TOKEN="$(
+      aws codeartifact get-authorization-token \
+      --domain $AWS_DOMAIN \
+      --domain-owner $AWS_ACCOUNT_ID \
+      --query authorizationToken \
+      --output text \
+      --profile infra
+  )"
+  export UV_EXTRA_INDEX_URL="https://aws:${AWS_CODEARTIFACT_TOKEN}@${AWS_DOMAIN}-${AWS_ACCOUNT_ID}.d.codeartifact.${AWS_REGION}.amazonaws.com/pypi/${AWS_CODEARTIFACT_REPOSITORY}/simple/"
 }

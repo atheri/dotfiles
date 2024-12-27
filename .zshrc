@@ -21,6 +21,7 @@ export PATH=$PATH:$HOME/.krew/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.rd/bin
+export PATH=$PATH:$HOME/github/k9s/execs
 export PYTHONPATH=./src:$PYTHONPATH
 export GOBIN=$HOME/go/bin
 
