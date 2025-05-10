@@ -7,32 +7,13 @@ views:
       - "AGE"
       - "NAMESPACE"
       - "NAME"
-      - "VS"
       - "READY"
       - "STATUS"
       - "RESTARTS"
-      - "NODE"
-      - "IP"
-      - "PF"
-      - "CPU"
-      - "MEM"
-      - "CPU/R:L"
-      - "MEM/R:L"
-      - "%CPU/R"
-      - "%CPU/L"
-      - "%MEM/R"
-      - "%MEM/L"
-      - "NOMINATED NODE"
-      - "READINESS GATES"
-      - "QOS"
-      - "LABELS"
-      - "VALID"
+      - "PF|W"
 
   # Alters the service view column layout
   v1/services:
+    sortColumn: AGE:desc
     columns:
-      - AGE
-      - NAMESPACE
-      - NAME
-      - TYPE
-      - CLUSTER-IP
+      - "AGE"

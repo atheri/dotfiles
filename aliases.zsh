@@ -1,7 +1,8 @@
 alias awssso="aws sso login --profile sandbox"
 alias piplogin="aws codeartifact login --region us-west-2 --tool pip --repository redwood-pypi --domain redwood --domain-owner 250982523368 --profile infra"
-alias venv_activate="source .venv/bin/activate"
-alias venv_clean="uv pip list --format json | jq -r '.[].name' | grep -v '^pip$' | xargs uv pip uninstall"
+alias twinelogin="aws codeartifact login --region us-west-2 --tool twine --repository redwood-pypi --domain redwood --domain-owner 250982523368 --profile infra"
+alias va="source .venv/bin/activate"
+alias vc="uv pip list --format json | jq -r '.[].name' | grep -v '^pip$' | xargs uv pip uninstall"
 
 alias k="kubectl"
 alias kc="kubectl confirm"
@@ -12,6 +13,8 @@ alias tg="terragrunt"
 
 alias docker_remove="docker stop $(docker ps -aq); docker rm -f $(docker ps -aq)"
 
+alias vpnc="sudo -i exit; nohup sudo gpclient connect rno03-gw1.redwoodmaterials.com -g rno03-gw1.redwoodmaterials.com --browser chrome &> /dev/null &"
+alias vpnd="pgrep -f gpclient | head -n 1 | awk '{print \"kill -9 \" \$1}' | sh"
 
 function watchpods() {watch "kubectl get pods -A | grep -E '$1'"}
 
@@ -88,5 +91,11 @@ function uvlogin() {
       --output text \
       --profile infra
   )"
-  export UV_EXTRA_INDEX_URL="https://aws:${AWS_CODEARTIFACT_TOKEN}@${AWS_DOMAIN}-${AWS_ACCOUNT_ID}.d.codeartifact.${AWS_REGION}.amazonaws.com/pypi/${AWS_CODEARTIFACT_REPOSITORY}/simple/"
+  export UV_INDEX_PRIVATE_REGISTRY_USERNAME=aws
+  export UV_INDEX_PRIVATE_REGISTRY_PASSWORD="$AWS_CODEARTIFACT_TOKEN"
+  cat > ~/.config/uv/uv.toml <<FILE
+[[index]]
+url = "https://aws:${AWS_CODEARTIFACT_TOKEN}@${AWS_DOMAIN}-${AWS_ACCOUNT_ID}.d.codeartifact.${AWS_REGION}.amazonaws.com/pypi/${AWS_CODEARTIFACT_REPOSITORY}/simple/"
+default = true
+FILE
 }
