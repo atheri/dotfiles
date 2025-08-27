@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# get sudo password primed
+sudo -i exit;
+
 COLS=$(tput cols)
 
 sep() {
