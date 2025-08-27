@@ -28,6 +28,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   sudo apt update
   sudo apt install -y vim git curl zsh tmux gcc make golang-go
   sudo chsh -s "$(which zsh)" "$(whoami)"
+  # neovim - build from source deps
+  sudo apt install -y ninja-build gettext cmake curl build-essential git
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "environment.sh: MAC"
   if ! brew -v >/dev/null; then
@@ -101,6 +103,15 @@ sep "update pinned apps"
 formatted_string=$(printf "'%s', " "${pinned_apps[@]}")
 final_string="[${formatted_string%, }]"
 gsettings set org.gnome.shell favorite-apps "$final_string"
+
+sep "neovim"
+git clone https://github.com/neovim/neovim $HOME/source_build/neovim
+(
+  cd "$HOME/source_build/neovim/"
+  git checkout stable
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
+)
 
 echo "----------------------------------------------------"
 echo "---------- Restart for zsh to take effect ----------"
