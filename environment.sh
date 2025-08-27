@@ -89,6 +89,9 @@ rm -rf ~/.vim/colors/colors
 sep "fzf"
 go install github.com/junegunn/fzf@latest
 
+sep "ghostty"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+
 echo "----------------------------------------------------"
 echo "---------- Restart for zsh to take effect ----------"
 echo "----------------------------------------------------"
