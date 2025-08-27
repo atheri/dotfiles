@@ -37,7 +37,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zs
 # Download dotfiles
 echo "=== download dotfiles ==================================================="
 if [ -d ~/.dotfiles ]; then rm -rf ~/.dotfiles; fi
-git clone git@github.com:atheri/dotfiles.git ~/.dotfiles
+git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
 echo "=== sym links ==========================================================="
