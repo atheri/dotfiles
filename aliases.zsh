@@ -1,6 +1,28 @@
 alias awssso="aws sso login --profile sandbox"
 alias piplogin="aws codeartifact login --region us-west-2 --tool pip --repository redwood-pypi --domain redwood --domain-owner 250982523368 --profile infra"
 alias twinelogin="aws codeartifact login --region us-west-2 --tool twine --repository redwood-pypi --domain redwood --domain-owner 250982523368 --profile infra"
+function uvlogin() {
+  AWS_DOMAIN="redwood"
+  AWS_ACCOUNT_ID="250982523368"
+  AWS_REGION="us-west-2"
+  AWS_CODEARTIFACT_REPOSITORY="redwood-pypi"
+  AWS_CODEARTIFACT_TOKEN="$(
+      aws codeartifact get-authorization-token \
+      --domain $AWS_DOMAIN \
+      --domain-owner $AWS_ACCOUNT_ID \
+      --query authorizationToken \
+      --output text \
+      --profile infra
+  )"
+  export UV_INDEX_PRIVATE_REGISTRY_USERNAME=aws
+  export UV_INDEX_PRIVATE_REGISTRY_PASSWORD="$AWS_CODEARTIFACT_TOKEN"
+  cat > ~/.config/uv/uv.toml <<FILE
+[[index]]
+url = "https://aws:${AWS_CODEARTIFACT_TOKEN}@${AWS_DOMAIN}-${AWS_ACCOUNT_ID}.d.codeartifact.${AWS_REGION}.amazonaws.com/pypi/${AWS_CODEARTIFACT_REPOSITORY}/simple/"
+default = true
+FILE
+}
+
 alias va="source .venv/bin/activate"
 alias vc="uv pip list --format json | jq -r '.[].name' | grep -v '^pip$' | xargs uv pip uninstall"
 
@@ -9,8 +31,6 @@ alias kc="kubectl confirm"
 alias kubectx="kubectl ctx"
 alias kubens="kubectl ns"
 
-alias tg="terragrunt"
-
 alias docker_remove="docker stop $(docker ps -aq); docker rm -f $(docker ps -aq)"
 
 alias vpnc="sudo -i exit; nohup sudo gpclient connect rno03-gw1.redwoodmaterials.com -g rno03-gw1.redwoodmaterials.com --browser chrome &> /dev/null &"
@@ -18,40 +38,7 @@ alias vpnd="pgrep -f gpclient | head -n 1 | awk '{print \"kill -9 \" \$1}' | sh"
 
 function watchpods() {watch "kubectl get pods -A | grep -E '$1'"}
 
-function switchJava() {sdk use java $(sdk list java | grep  '\-amzn' | grep 'installed' | cut -d '|' -f 6 - | fzf)}
-
 alias ecrlogin="aws ecr get-login-password --profile infra --region us-west-2 | docker login --username AWS --password-stdin 250982523368.dkr.ecr.us-west-2.amazonaws.com"
-
-function export_profile() {
-  echo "exporting profile $1"
-  aws-export-credentials --profile "$1" -c "${1}-export" --cache-file "$HOME/.aws/aws-credentials-export/$1"
-}
-
-function export_profile_orig() {  
-  echo "exporting profile $1"
-  aws-export-credentials --profile "$1" -c "${1}" --cache-file "$HOME/.aws/aws-credentials-export/$1"
-}
-
-function export_profiles() {  
-  echo "exporting profiles"
-  for thing in $(aws configure list-profiles) ; do
-    if ! [[ $thing =~ ^.*-export$ ]]; then
-      aws-export-credentials --profile "$thing" -c "${thing}-export" --cache-file "$HOME/.aws/aws-credentials-export/$thing"
-      echo "exporting from SSO profile: $thing-export"
-    fi
-  done
-}
-
-function export_profiles_orig() {  
-  rm $HOME/.aws/credentials 
-  echo "exporting profiles"
-  for thing in $(aws configure list-profiles) ; do
-    if ! [[ $thing =~ ^.*-export$ ]]; then
-      aws-export-credentials --profile "$thing" -c "${thing}" --cache-file "$HOME/.aws/aws-credentials-export/$thing"
-      echo "exporting from SSO profile: $thing"
-    fi
-  done
-}
 
 function kube-toggle() {
   if (( ${+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND} )); then
@@ -78,24 +65,3 @@ function k_getcertexp() {
   kubectl get secret $1 -o "jsonpath={.data['tls\.crt']}" | base64 -d | openssl x509 -enddate -noout
 }
 
-function uvlogin() {
-  AWS_DOMAIN="redwood"
-  AWS_ACCOUNT_ID="250982523368"
-  AWS_REGION="us-west-2"
-  AWS_CODEARTIFACT_REPOSITORY="redwood-pypi"
-  AWS_CODEARTIFACT_TOKEN="$(
-      aws codeartifact get-authorization-token \
-      --domain $AWS_DOMAIN \
-      --domain-owner $AWS_ACCOUNT_ID \
-      --query authorizationToken \
-      --output text \
-      --profile infra
-  )"
-  export UV_INDEX_PRIVATE_REGISTRY_USERNAME=aws
-  export UV_INDEX_PRIVATE_REGISTRY_PASSWORD="$AWS_CODEARTIFACT_TOKEN"
-  cat > ~/.config/uv/uv.toml <<FILE
-[[index]]
-url = "https://aws:${AWS_CODEARTIFACT_TOKEN}@${AWS_DOMAIN}-${AWS_ACCOUNT_ID}.d.codeartifact.${AWS_REGION}.amazonaws.com/pypi/${AWS_CODEARTIFACT_REPOSITORY}/simple/"
-default = true
-FILE
-}
