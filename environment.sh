@@ -5,7 +5,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "environment.sh: LINUX"
   echo "=== apt base ============================================================"
   sudo apt update
-  sudo apt install -y vim git curl zsh tmux gcc make
+  sudo apt install -y vim git curl zsh tmux gcc make golang-go
   chsh -s "$(which zsh)"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "environment.sh: MAC"
@@ -68,6 +68,9 @@ git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/colors
 rm -f ~/.vim/colors/README.md
 mv ~/.vim/colors/colors/wombat.vim ~/.vim/colors/
 rm -rf ~/.vim/colors/colors
+
+echo "=== fzf ================================================================="
+go install github.com/junegunn/fzf@latest
 
 echo "----------------------------------------------------"
 echo "---------- Restart for zsh to take effect ----------"
