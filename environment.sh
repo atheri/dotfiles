@@ -3,12 +3,16 @@
 # get sudo password primed
 sudo -i exit;
 
-COLS=$(tput cols)
+pinned_apps=(
+  "org.gnome.Nautilus.desktop"
+  "google-chrome.desktop"
+)
 
 sep() {
+  cols=$(tput cols)
   symbol="="
   text="$symbol$symbol$symbol $1 "
-  remain_n=$(( COLS-${#text} ))
+  remain_n=$(( cols-${#text} ))
   fill=""
   for (( i=0; i<remain_n; i++ ))
   do
@@ -91,6 +95,12 @@ go install github.com/junegunn/fzf@latest
 
 sep "ghostty"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+pinned_apps+=("com.mitchellh.ghostty.desktop")
+
+sep "update pinned apps"
+formatted_string=$(printf "'%s', " "${pinned_apps[@]}")
+final_string="[${formatted_string%, }]"
+gsettings set org.gnome.shell favorite-apps "$final_string"
 
 echo "----------------------------------------------------"
 echo "---------- Restart for zsh to take effect ----------"
