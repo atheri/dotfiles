@@ -1,19 +1,33 @@
 #!/bin/bash
 
+COLS=$(tput cols)
+
+sep() {
+  symbol="="
+  text="$symbol$symbol$symbol $1 "
+  remain_n=$(( COLS-${#text} ))
+  fill=""
+  for (( i=0; i<remain_n; i++ ))
+  do
+    fill=$fill$symbol
+  done
+  printf "%s%s\\n" "$text" "$fill"
+}
+
 # General installs
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "environment.sh: LINUX"
-  echo "=== apt base ============================================================"
+  sep "apt base"
   sudo apt update
   sudo apt install -y vim git curl zsh tmux gcc make golang-go
-  chsh -s "$(which zsh)"
+  sudo chsh -s "$(which zsh)" "$(whoami)"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "environment.sh: MAC"
   if ! brew -v >/dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
   brew bundle --file=mac/Brewfile
-  chsh -s /bin/zsh
+  sudo chsh -s /bin/zsh
 elif [[ "$OSTYPE" == "msys" ]]; then
   echo "environment.sh: WINDOWS + GITBASH"
 else
@@ -22,25 +36,25 @@ else
 fi
 
 # Git config
-echo "=== git config =========================================================="
+sep "git config"
 git config --global user.name "Cory Lotze"
 git config --global user.email "cory.lotze@redwoodmaterials.com"
 git config --global merge.tool vimdiff
 git config --global --add difftool.prompt false
 
 # oh-my-zsh
-echo "=== oh-my-zsh ==========================================================="
+sep "oh-my-zsh"
 if [ -d ~/.oh-my-zsh ]; then rm -rf ~/.oh-my-zsh; fi
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
 
 # Download dotfiles
-echo "=== download dotfiles ==================================================="
+sep "download dotfiles"
 if [ -d ~/.dotfiles ]; then rm -rf ~/.dotfiles; fi
 git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 
 # Sym links
-echo "=== sym links ==========================================================="
+sep "sym links"
 DEST=~/.dotfiles
 DOTFILES=".vim .zshrc .p10k.zsh .k9s"
 for file in $DOTFILES; do
@@ -49,7 +63,7 @@ for file in $DOTFILES; do
 done
 
 # Setup alias file
-echo "=== alias file =========================================================="
+sep "alias file"
 FILE="aliases.zsh"
 if [ -d ~/$FILE ]; then rm -rf ~/$FILE; fi
 ln -s -f "$DEST/$FILE" "$HOME/.oh-my-zsh/custom/$FILE"
@@ -59,7 +73,7 @@ ln -s -f "$DEST/$FILE" "$HOME/.$FILE"
 touch ~/.secrets.sh
 
 # Create directories for vim
-echo "=== vim config =========================================================="
+sep "vim config"
 mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap
 
 # Get wombat colorscheme
@@ -69,7 +83,7 @@ rm -f ~/.vim/colors/README.md
 mv ~/.vim/colors/colors/wombat.vim ~/.vim/colors/
 rm -rf ~/.vim/colors/colors
 
-echo "=== fzf ================================================================="
+sep "fzf"
 go install github.com/junegunn/fzf@latest
 
 echo "----------------------------------------------------"
