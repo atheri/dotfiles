@@ -31,7 +31,7 @@ alias kc="kubectl confirm"
 alias kubectx="kubectl ctx"
 alias kubens="kubectl ns"
 
-alias docker_remove="docker stop $(docker ps -aq); docker rm -f $(docker ps -aq)"
+alias docker_remove='docker stop $(docker ps -aq); docker rm -f $(docker ps -aq)'
 
 alias vpnc="sudo -i exit; nohup sudo gpclient connect rno03-gw1.redwoodmaterials.com -g rno03-gw1.redwoodmaterials.com --browser chrome &> /dev/null &"
 alias vpnd="pgrep -f gpclient | head -n 1 | awk '{print \"kill -9 \" \$1}' | sh"
