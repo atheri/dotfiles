@@ -26,7 +26,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "environment.sh: LINUX"
   sep "apt base"
   sudo apt update
-  sudo apt install -y git curl zsh tmux gcc make golang-go
+  sudo apt install -y vim git curl zsh tmux gcc make golang-go
   sudo chsh -s "$(which zsh)" "$(whoami)"
   # neovim - build from source deps
   sudo apt install -y ninja-build gettext cmake curl build-essential git
@@ -65,7 +65,7 @@ git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 # Sym links
 sep "sym links"
 DEST=~/.dotfiles
-DOTFILES=".zshrc .p10k.zsh .k9s"
+DOTFILES=".vim .zshrc .p10k.zsh .k9s"
 for file in $DOTFILES; do
   if [ -d ~/"$file" ]; then rm -rf ~/"$file"; fi
   ln -s -f "$DEST/$file" ~/"$file"
@@ -80,6 +80,17 @@ ln -s -f "$DEST/$FILE" "$HOME/.$FILE"
 
 # placeholder secrets file
 touch ~/.secrets.sh
+
+# Create directories for vim
+sep "vim config"
+mkdir -p ~/.vim/.undo ~/.vim/.backup ~/.vim/.swap
+
+# Get wombat colorscheme
+if [ -d ~/.vim/colors ]; then rm -rf ~/.vim/colors; fi
+git clone https://github.com/sheerun/vim-wombat-scheme.git ~/.vim/colors
+rm -f ~/.vim/colors/README.md
+mv ~/.vim/colors/colors/wombat.vim ~/.vim/colors/
+rm -rf ~/.vim/colors/colors
 
 sep "fzf"
 go install github.com/junegunn/fzf@latest
