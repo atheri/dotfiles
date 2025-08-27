@@ -27,7 +27,6 @@ git config --global user.name "Cory Lotze"
 git config --global user.email "cory.lotze@redwoodmaterials.com"
 git config --global merge.tool vimdiff
 git config --global --add difftool.prompt false
-exit 1
 
 # oh-my-zsh
 echo "=== oh-my-zsh ==========================================================="
