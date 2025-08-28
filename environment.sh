@@ -85,8 +85,10 @@ sep "fzf"
 go install github.com/junegunn/fzf@latest
 
 sep "ghostty"
+GHOSTTY_CONFIG_FILE="$HOME/.config/ghostty/config"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
-ln -s -f "$DEST/ghostty/config" ~/.config/ghostty/config
+if [ -d $GHOSTTY_CONFIG_FILE ]; then rm -rf $GHOSTTY_CONFIG_FILE; fi
+ln -s -f "$DEST/ghostty/config" $GHOSTTY_CONFIG_FILE
 pinned_apps+=("com.mitchellh.ghostty.desktop")
 
 sep "blur-my-shell"
