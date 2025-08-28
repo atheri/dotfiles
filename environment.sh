@@ -86,7 +86,16 @@ go install github.com/junegunn/fzf@latest
 
 sep "ghostty"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+ln -s -f "$DEST/ghostty/config" ~/.config/ghostty/config
 pinned_apps+=("com.mitchellh.ghostty.desktop")
+
+sep "blur-my-shell"
+git clone https://github.com/aunetx/blur-my-shell $HOME/source_build/blur-my-shell
+(
+  cd ~/source_build/blur-my-shell
+  make install
+)
+sudo apt install gnome-shell-extensions
 
 sep "update pinned apps"
 formatted_string=$(printf "'%s', " "${pinned_apps[@]}")
@@ -96,7 +105,7 @@ gsettings set org.gnome.shell favorite-apps "$final_string"
 sep "neovim"
 git clone https://github.com/neovim/neovim $HOME/source_build/neovim
 (
-  cd "$HOME/source_build/neovim/"
+  cd ~/source_build/neovim
   git checkout stable
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   sudo make install
