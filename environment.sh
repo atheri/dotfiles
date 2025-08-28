@@ -95,7 +95,7 @@ git clone https://github.com/aunetx/blur-my-shell $HOME/source_build/blur-my-she
   cd ~/source_build/blur-my-shell
   make install
 )
-sudo apt install gnome-shell-extensions
+sudo apt install -y gnome-shell-extensions
 
 sep "update pinned apps"
 formatted_string=$(printf "'%s', " "${pinned_apps[@]}")
