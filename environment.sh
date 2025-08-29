@@ -65,7 +65,7 @@ git clone https://github.com/atheri/dotfiles.git ~/.dotfiles
 # Sym links
 sep "sym links"
 DEST=~/.dotfiles
-DOTFILES=".zshrc .p10k.zsh .k9s"
+DOTFILES=".zshrc .p10k.zsh .k9s .gitignore"
 for file in $DOTFILES; do
   if [ -d ~/"$file" ]; then rm -rf ~/"$file"; fi
   ln -s -f "$DEST/$file" ~/"$file"
