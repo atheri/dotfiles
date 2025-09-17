@@ -1,3 +1,4 @@
+alias vim="nvim"
 alias awssso="aws sso login --profile sandbox"
 alias piplogin="aws codeartifact login --region us-west-2 --tool pip --repository redwood-pypi --domain redwood --domain-owner 250982523368 --profile infra"
 alias twinelogin="aws codeartifact login --region us-west-2 --tool twine --repository redwood-pypi --domain redwood --domain-owner 250982523368 --profile infra"
