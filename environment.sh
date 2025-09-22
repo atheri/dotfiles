@@ -85,8 +85,12 @@ sep "fzf"
 go install github.com/junegunn/fzf@latest
 
 sep "ghostty"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
-ln -s -f "$DEST/ghostty/config" ~/.config/ghostty/config
+if command -v "ghostty" &> /dev/null; then
+	echo "ghostty installed, no op"
+else
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+	ln -s -f "$DEST/ghostty/config" ~/.config/ghostty/config
+fi
 pinned_apps+=("com.mitchellh.ghostty.desktop")
 
 sep "blur-my-shell"
@@ -103,13 +107,29 @@ final_string="[${formatted_string%, }]"
 gsettings set org.gnome.shell favorite-apps "$final_string"
 
 sep "neovim"
-git clone https://github.com/neovim/neovim $HOME/source_build/neovim
-(
-  cd ~/source_build/neovim
-  git checkout stable
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  sudo make install
-)
+
+if command -v "nvim" &> /dev/null; then
+	echo "nvim installed, no op"
+else
+	git clone https://github.com/neovim/neovim $HOME/source_build/neovim
+	(
+	  cd ~/source_build/neovim
+	  git checkout stable
+	  make CMAKE_BUILD_TYPE=RelWithDebInfo
+	  sudo make install
+	)
+fi
+
+
+sep "aws cli"
+if command -v "aws" &> /dev/null; then
+	echo "aws installed, no op"
+else
+	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+	unzip awscliv2.zip
+	sudo ./aws/install
+	rm -r awscliv2.zip ./aws/
+fi
 
 echo "----------------------------------------------------"
 echo "---------- Restart for zsh to take effect ----------"
