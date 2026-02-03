@@ -22,3 +22,11 @@ views:
     sortColumn: AGE:desc
     columns:
       - "AGE"
+      - "NAME"
+      - "STATUS"
+      - "TAINTS"
+      - "VERSION"
+      - "PODS"
+      - "TYPE:.metadata.labels.node\\.kubernetes\\.io/instance-type"
+      - "%CPU"
+      - "%MEM"
