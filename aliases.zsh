@@ -40,6 +40,7 @@ alias vpnd="pgrep -f gpclient | head -n 1 | awk '{print \"kill -9 \" \$1}' | sh"
 function watchpods() {watch "kubectl get pods -A | grep -E '$1'"}
 
 alias ecrlogin="aws ecr get-login-password --profile infra --region us-west-2 | docker login --username AWS --password-stdin 250982523368.dkr.ecr.us-west-2.amazonaws.com"
+alias bessecrlogin="aws ecr get-login-password --profile bess --region us-west-2 | docker login --username AWS --password-stdin 491085429961.dkr.ecr.us-west-2.amazonaws.com"
 
 function kube-toggle() {
   if (( ${+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND} )); then
@@ -66,3 +67,26 @@ function k_getcertexp() {
   kubectl get secret $1 -o "jsonpath={.data['tls\.crt']}" | base64 -d | openssl x509 -enddate -noout
 }
 
+alias cdk_override="command cdk $@"
+function cdk() {
+  # 1. Check if the environment is in sync (silently)
+  if uv sync --all-packages --check >/dev/null 2>&1; then
+    # 2. If valid, run the actual cdk command with all arguments
+    command cdk "$@"
+  else
+    # 3. If invalid, prompt the user
+    # printf works reliably across both zsh and bash
+    printf "⚠️  uv environment is out of sync.\nRun 'uv sync' and continue? [y/N] "
+    read -r response
+
+    # 4. Check user input (matches y, Y, yes, YES, etc.)
+    if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+      echo "Running uv sync..."
+      # Run sync; if successful, run cdk
+       uv sync --all-packages && command cdk "$@"
+    else
+      echo "CAUTION: RUNNING WITHOUT UV SYNC"
+      command cdk "$@"
+    fi
+  fi
+}

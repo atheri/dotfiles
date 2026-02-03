@@ -17,3 +17,8 @@ views:
     sortColumn: AGE:desc
     columns:
       - "AGE"
+  
+  v1/nodes:
+    sortColumn: AGE:desc
+    columns:
+      - "AGE"
